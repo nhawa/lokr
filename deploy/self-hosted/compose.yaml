@@ -1,0 +1,5 @@
+# PLACEHOLDER ONLY: not a runnable Compose stack.
+# LOK-002 must create app and PostgreSQL services per accepted ADR-000; runner is optional later.
+# Security defaults: ports bound 127.0.0.1; persistent volumes;
+# non-root containers; no Docker socket; runner disabled by default.
+services: {}

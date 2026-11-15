@@ -1,0 +1,294 @@
+{
+  "version": 1,
+  "foundation": {
+    "strategy": "create",
+    "existingAssets": [
+      "README.md",
+      "docs/PRD.md"
+    ],
+    "assetActions": [
+      {
+        "asset": "README.md",
+        "action": "preserve",
+        "reason": "Mempertahankan nama Lokr dan posisi produk sebagai workspace pencarian kerja pribadi."
+      },
+      {
+        "asset": "docs/PRD.md",
+        "action": "protect",
+        "reason": "Menjaga istilah CV, lowongan, lamaran, dan persiapan wawancara sesuai fungsi produk."
+      },
+      {
+        "asset": "Konsep mark Lokr, belum berupa file",
+        "action": "create",
+        "reason": "Arah mark berupa dua garis bersiku yang membentuk L seperti sudut lembar dokumen, berwarna accent dan tanpa kotak latar."
+      }
+    ],
+    "lockedDecisions": [
+      "Nama produk Lokr; workspace pribadi self-hosted untuk satu pemilik.",
+      "Dashboard operasional dengan Tambah lowongan sebagai aksi utama.",
+      "Achromatic ledger, light: chrome netral, primary near-black, warna biru hanya pada elemen data utama.",
+      "Geist untuk antarmuka; Geist Mono hanya untuk ID dan key yang memang perlu terlihat, bukan kredensial.",
+      "Tidak ada logo, font, palet, atau halaman existing yang ditemukan; apps dan packages hanya berisi .gitkeep.",
+      "Data AI bersifat estimasi kecocokan heuristik; tidak boleh disebut skor ATS atau peluang diterima.",
+      "Pengiriman CV ke provider memerlukan tindakan eksplisit dan penjelasan data yang dikirim.",
+      "Tidak menetapkan keputusan lisensi atau workflow penyuntingan CV yang masih terbuka."
+    ],
+    "assumptions": [
+      "Bahasa Indonesia dipertahankan sebagai bahasa antarmuka berdasarkan permintaan pengguna, bukan sebagai bahasa UI existing yang telah diverifikasi.",
+      "Tidak ada gambar referensi terlampir. App sheet menjadi dasar visual; kebutuhan referensi gambar dalam brief sebelumnya tidak menghalangi fase ini.",
+      "Pola builder dan settings dalam sheet tidak diterapkan karena permintaan aktual adalah dashboard lamaran; bahasa visual dan shell open-plane tetap digunakan.",
+      "Secondary mengikuti pengecualian eksplisit move sheet: pill abu-abu #e5e5e5 dengan border control, bukan fill putih default.",
+      "Data demonstrasi, jika diperlukan kemudian, diberi label Data contoh dan tidak dianggap riwayat pengguna."
+    ]
+  },
+  "creativeDirection": {
+    "summary": "Lokr sebagai buku kerja lamaran yang tenang dan presisi. Face yang dipilih adalah satu hue biru #1d5fbf pada elemen data utama ringkasan lamaran, sementara nama produk, navigasi, angka, dan tindakan tetap berwarna tinta. Pertanyaan visualnya: lamaran saya berada di tahap mana dan apa yang perlu saya lanjutkan?",
+    "traits": [
+      {
+        "quality": "Teratur seperti catatan kerja",
+        "boundary": "Bukan deretan kartu KPI dekoratif."
+      },
+      {
+        "quality": "Pribadi dan dapat ditelusuri",
+        "boundary": "Bukan klaim bahwa penggunaan AI selalu berlangsung lokal."
+      },
+      {
+        "quality": "Ringkas dan berorientasi tindakan",
+        "boundary": "Bukan antarmuka kosong yang menyembunyikan konteks lamaran."
+      }
+    ],
+    "productiveTension": "Permukaan yang sangat netral memberi ruang bagi hubungan konkret antara posisi, versi CV, dan tahap lamaran untuk menjadi identitas produk.",
+    "signatureDevice": {
+      "description": "Jejak lamaran Lokr: hubungan ringkas antara lowongan, versi CV yang digunakan, dan tahap lamaran, ditulis sebagai satu rangkaian yang mudah ditelusuri.",
+      "status": "candidate",
+      "invariants": [
+        "Urutan selalu lowongan, versi CV, lalu tahap lamaran.",
+        "Menggunakan teks nyata dan pemisah tipis netral, tanpa node berwarna atau diagram dekoratif.",
+        "Versi CV yang belum ditautkan ditulis Belum ditautkan; tidak direkayasa.",
+        "Tahap lamaran selalu memiliki label teks, tidak disampaikan melalui warna saja.",
+        "Pada mobile rangkaian boleh membungkus sambil mempertahankan urutan dan hubungan."
+      ]
+    },
+    "restraint": "Kurang dari 1% piksel berwarna. Biru hanya menandai data utama; warna semantik dibatasi pada sinyal kecil yang benar-benar bermakna. Semua angka lamaran memakai bobot 400–500.",
+    "avoid": [
+      "Sidebar gelap atau berwarna",
+      "Primary button berwarna biru",
+      "Kartu KPI bertint, ikon dalam kotak berwarna, dan sparkline",
+      "Gradien, glass, glow, dan bayangan saat diam",
+      "Chart pelangi atau chart tanpa skala nilai",
+      "Angka tebal 700 untuk jumlah lamaran",
+      "Hero marketing, sapaan generik, dan animasi masuk"
+    ]
+  },
+  "colorPalette": [
+    {
+      "name": "ground",
+      "value": "#f8f8f8",
+      "usage": "Latar halaman dan sidebar; mempertahankan netralitas sheet."
+    },
+    {
+      "name": "surface",
+      "value": "#ffffff",
+      "usage": "Permukaan kartu, input, dan overlay; juga teks pada primary near-black."
+    },
+    {
+      "name": "raised",
+      "value": "#eeeeee",
+      "usage": "Permukaan interaksi netral, hover, dan navigasi aktif."
+    },
+    {
+      "name": "border",
+      "value": "#e6e6e6",
+      "usage": "Batas kartu 1px; bukan warna teks."
+    },
+    {
+      "name": "rule",
+      "value": "#f0f0f0",
+      "usage": "Pemisah baris dan grid chart yang ringan; bukan warna teks."
+    },
+    {
+      "name": "control",
+      "value": "#d4d4d4",
+      "usage": "Border kontrol 1px; fokus menggunakan outline accent yang lebih tegas."
+    },
+    {
+      "name": "text",
+      "value": "#0a0a0a",
+      "usage": "Judul, isi, angka, serta label secondary termasuk pada fill #e5e5e5."
+    },
+    {
+      "name": "muted",
+      "value": "#6b6b6b",
+      "usage": "Label, metadata, placeholder, angka nol, dan tanda nilai kosong pada surface, ground, atau raised; jangan gunakan pada latar lebih gelap yang menurunkan kontras di bawah 4.5:1."
+    },
+    {
+      "name": "accent",
+      "value": "#141414",
+      "usage": "Mark garis Lokr, primary button, indikator fokus, dan penekanan chrome netral."
+    },
+    {
+      "name": "positive",
+      "value": "#2e7d32",
+      "usage": "Sinyal perubahan kecil yang menguntungkan, hanya bila didukung data; bukan warna semua tahap maju."
+    },
+    {
+      "name": "negative",
+      "value": "#c4242a",
+      "usage": "Sinyal kesalahan atau perubahan merugikan yang kecil, dengan label penjelas."
+    },
+    {
+      "name": "warning",
+      "value": "#92400e",
+      "usage": "Peringatan singkat yang memerlukan perhatian; bukan pewarnaan kartu."
+    },
+    {
+      "name": "chart-1",
+      "value": "#141414",
+      "usage": "Data pendukung dalam tinta; label angka tetap memakai text."
+    },
+    {
+      "name": "chart-2",
+      "value": "#8a8a8a",
+      "usage": "Mark grafis pembanding saja, tidak untuk tulisan; beri label muted atau text dan pembeda bentuk bila perlu."
+    },
+    {
+      "name": "chart-3",
+      "value": "#1d5fbf",
+      "usage": "Hue utama sesuai face terpilih: satu mark data utama atau pilihan tahap yang sedang dibaca. Gunakan garis atau mark kecil agar anggaran warna tetap di bawah 1%."
+    },
+    {
+      "name": "pill-positive-bg",
+      "value": "#dcfae5",
+      "usage": "Latar badge sukses singkat, digunakan jarang bersama pill-positive-ink."
+    },
+    {
+      "name": "pill-positive-ink",
+      "value": "#04250e",
+      "usage": "Teks badge sukses pada pill-positive-bg."
+    },
+    {
+      "name": "pill-negative-bg",
+      "value": "#ffedea",
+      "usage": "Latar badge kesalahan ringkas, bukan latar baris atau kartu."
+    },
+    {
+      "name": "pill-negative-ink",
+      "value": "#831c1e",
+      "usage": "Teks badge kesalahan pada pill-negative-bg."
+    },
+    {
+      "name": "pill-warning-bg",
+      "value": "#fffbeb",
+      "usage": "Latar badge Perlu ditinjau yang bersifat kontekstual dan terbatas."
+    },
+    {
+      "name": "pill-warning-ink",
+      "value": "#92400e",
+      "usage": "Teks badge peringatan pada pill-warning-bg."
+    },
+    {
+      "name": "pill-neutral-bg",
+      "value": "#eeeeee",
+      "usage": "Latar default seluruh badge tahap lamaran agar pipeline tidak menjadi pelangi."
+    },
+    {
+      "name": "pill-neutral-ink",
+      "value": "#3d3d3d",
+      "usage": "Label tahap lamaran pada pill-neutral-bg, termasuk Ditolak dan Ditarik."
+    }
+  ],
+  "typefaces": [
+    {
+      "family": "Geist",
+      "source": "Google Fonts",
+      "roles": [
+        "interface"
+      ],
+      "weights": [
+        400,
+        500,
+        700
+      ]
+    },
+    {
+      "family": "Geist Mono",
+      "source": "Google Fonts",
+      "roles": [
+        "IDs dan keys nonrahasia saja"
+      ],
+      "weights": [
+        400
+      ]
+    }
+  ],
+  "interfaceDirection": "Shell open-plane dengan sidebar berlabel selebar 256px di atas ground, tanpa top bar desktop. Nama Lokr dan konteks Workspace pribadi berada di bagian atas, tanpa switcher multi-workspace fiktif. Header konten dimulai 32–36px dari atas. Navigasi memiliki pitch 34px, baris 32px, ikon outline 16px dengan stroke sekitar 1.5px, label 14px/400, dan item aktif raised dengan radius 6px serta inset 12px. Utilitas dan akun berada di bawah. Density sparse, gap konsisten 12px, padding 24px, baris data 44px, kontrol 36px. Label menggunakan satu gaya: Geist 12px/400, sentence case, muted, tracking 0. Tabel tanpa zebra atau header band; angka tabular rata kanan. KPI berupa tipografi dalam kelompok dengan pemisah tipis. Semua tahap lamaran menggunakan pasangan pill-neutral; pasangan positive, negative, dan warning hanya untuk umpan balik kontekstual kecil. Hover memakai raised, pressed mempertahankan label yang jelas, selected memakai fill netral dan atribut semantik, focus-visible memakai outline accent 2px dengan offset, disabled memakai label muted pada raised tanpa opacity keseluruhan. Loading mempertahankan ukuran kontrol dan teks kegiatannya. Mobile memakai bar 48px, margin 16px, tombol menu untuk sheet navigasi layar penuh, serta paling banyak satu aksi pada bar. Sheet mengelola fokus, Escape, dan pengembalian fokus. Semua teks harus mencapai kontras minimal 4.5:1 pada latarnya.",
+  "designTokens": {
+    "typeScale": {
+      "display": "24px",
+      "h1": "24px",
+      "h2": "16px",
+      "h3": "30px",
+      "body": "14px",
+      "small": "12px",
+      "label": "12px"
+    },
+    "radius": {
+      "scale": [
+        "6px",
+        "8px"
+      ],
+      "pill": "999px"
+    },
+    "spacing": {
+      "section": "24px",
+      "gutter": "12px",
+      "stack": "12px"
+    },
+    "buttons": {
+      "primary": "Satu primary: Tambah lowongan, tinggi 36px, fill accent #141414, teks surface #ffffff 14px/500, radius 6px. Tidak memakai warna chart.",
+      "secondary": "Satu gaya secondary: Unggah CV dan aksi sekunder setara, tinggi 36px, fill abu-abu #e5e5e5 sesuai move sheet, teks #0a0a0a 14px/500, border control 1px, radius pill 999px."
+    },
+    "surfaces": "Ground #f8f8f8, kartu surface #ffffff dengan radius 8px dan border #e6e6e6 1px; pemisah baris #f0f0f0 dan kontrol #d4d4d4. Tidak ada bayangan, termasuk pada overlay yang dipisahkan dengan border. Sheet mobile penuh bersudut 0; overlay kecil memakai radius 8px. Tidak ada kartu bertint. Geist memakai 400 untuk isi dan angka, 500 untuk judul serta penekanan; 700 hanya diperbolehkan untuk nilai uang sehingga tidak digunakan pada dashboard lamaran ini. Line-height body 20px dan section 24px; semua angka yang berubah memakai tabular-nums."
+  },
+  "imageDirection": {
+    "summary": "Dashboard tidak membutuhkan imagery. Objek utamanya berupa nama posisi, perusahaan, dokumen CV, dan tahap lamaran dalam teks.",
+    "subjects": [],
+    "treatment": "Gunakan ikon dokumen dan navigasi outline netral bila membantu pengenalan. Mark Lokr berupa simbol garis, bukan file logo yang diklaim sudah tersedia. Akun pemilik cukup berlabel teks tanpa potret rekaan.",
+    "avoid": [
+      "Fotografi stok dan ilustrasi dekoratif",
+      "Logo perusahaan yang belum tersedia atau terverifikasi",
+      "Potret pengguna rekaan",
+      "Thumbnail CV yang mengekspos isi dokumen pribadi",
+      "Avatar dan ikon bertint yang menambah warna tanpa kebutuhan"
+    ]
+  },
+  "motionDirection": {
+    "summary": "Gerak hanya sebagai umpan balik. Gunakan pasangan bersama 180ms dan cubic-bezier(0.2, 0, 0, 1), dalam rentang 120–250ms. Tidak ada entrance, scroll reveal, atau count-up.",
+    "principles": [
+      "Menegaskan respons kontrol saat hover atau press; perubahan fill mengikuti kontrol yang sama tanpa menggeser label; 180ms dalam rentang 120–250ms, ease-out jelas, fokus keyboard tetap langsung terlihat.",
+      "Menjaga hubungan pilihan dan hasil saat filter, sort, atau tab berubah; identitas baris stabil dan posisi diperbarui tanpa menghilangkan data penting; 180ms dalam rentang 120–250ms, ease-out jelas dan dapat diinterupsi.",
+      "Menjelaskan hubungan pemicu dan panel saat menu atau drawer dibuka dan ditutup; panel bergerak ringan dari tepi terkait dengan pengelolaan fokus; 180ms dalam rentang 120–250ms, ease-out jelas.",
+      "Menghubungkan perubahan pilihan data dengan mark chart bila kontrol chart tersedia; skala dan label tetap terbaca serta stabil; 180ms dalam rentang 120–250ms, ease-out jelas tanpa menghitung naik angka.",
+      "Menunjukkan hasil perubahan status atau penyimpanan setelah tindakan pengguna; label dan pesan umpan balik berubah pada objek terkait tanpa entrance ulang seluruh halaman; 180ms dalam rentang 120–250ms, ease-out jelas.",
+      "Mempertahankan operasi yang setara saat prefers-reduced-motion aktif; semua hubungan kontrol, hasil, dan panel langsung mencapai keadaan akhir pada 0ms, menggantikan transisi ease-out 180ms."
+    ],
+    "avoid": [
+      "Animasi masuk halaman atau kartu",
+      "Shimmer dan gerakan dekoratif berulang",
+      "Perubahan skala chart yang menyamarkan perbandingan",
+      "Animasi yang menunda akses data",
+      "Replay transisi saat refresh tanpa tindakan pengguna"
+    ]
+  },
+  "voice": {
+    "summary": "Bahasa Indonesia yang langsung dan spesifik pada pekerjaan pencari kerja. Gunakan Tambah lowongan, Unggah CV, Tinjau hasil ekstraksi, Lanjutkan draf, dan Ubah tahap lamaran. Tahap: Disimpan, Dilamar, Seleksi awal, Wawancara, Penawaran, Ditolak, Ditarik. Empty state: Belum ada lowongan tersimpan. Tambahkan posisi yang ingin kamu lamar. Filter kosong: Tidak ada lamaran yang cocok dengan filter ini. Kesalahan: Lamaran belum berhasil dimuat. Coba lagi. Koneksi: AI belum dikonfigurasi. Nilai kosong dibedakan dari nol; data simulasi selalu ditandai Data contoh. Penjelasan AI menyebut provider, data yang dikirim, dan sifat estimasi tanpa menjanjikan hasil.",
+    "avoid": [
+      "Items, records, dan label generik tanpa konteks",
+      "Sapaan promosi atau motivasi berlebihan",
+      "Skor ATS dan jaminan diterima",
+      "Klaim semua data tetap lokal saat memakai provider eksternal",
+      "Persentase pertumbuhan atau hasil lamaran rekaan",
+      "Pesan sukses sebelum perubahan benar-benar berhasil"
+    ]
+  }
+}

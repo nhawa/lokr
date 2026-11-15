@@ -1,0 +1,50 @@
+{
+  "originalRequest": "cek project ini dan buatkan tampilan dashboardnya dulu",
+  "subject": "Dashboard Lokr, workspace pribadi self-hosted untuk mengelola CV, lowongan, lamaran, dan persiapan wawancara.",
+  "pageType": "dashboard",
+  "scope": "Desain awal halaman dashboard utama beserta navigasi aplikasi, tampilan desktop dan mobile, serta keadaan loading, kosong, gagal, dan berisi data. Halaman modul lain cukup diwakili tujuan navigasi, bukan dirancang lengkap pada tahap ini.",
+  "primaryGoal": "Membantu pencari kerja melihat perkembangan lamaran, mengenali pekerjaan yang belum selesai, dan melanjutkan aktivitas pencarian kerja dari satu halaman.",
+  "audience": "Pencari kerja individual yang mengelola data dan proses lamarannya sendiri, satu pemilik per instalasi.",
+  "offer": "Workspace privat yang menyatukan versi CV, lowongan tersimpan, status lamaran, analisis kecocokan berbasis bukti, dan persiapan wawancara, dengan AI opsional yang dipicu pengguna.",
+  "primaryAction": "Tambah lowongan secara manual, lalu lanjutkan pengelolaan lamaran dari dashboard.",
+  "creativeControl": "Kendali kreatif luas untuk desain dashboard baru yang jelas, mudah dipindai, dan berorientasi tindakan. Warna, tipografi, serta komposisi ditentukan setelah pemilihan referensi visual, dengan tetap mengikuti ruang lingkup MVP.",
+  "requiredContent": [
+    "Navigasi aplikasi: Dashboard, CV Saya, Lowongan, Lamaran, Persiapan Wawancara, dan Pengaturan; indikator halaman aktif serta navigasi ringkas pada mobile.",
+    "Header dashboard: judul Ringkasan, konteks workspace pribadi, tombol utama Tambah lowongan, dan aksi sekunder Unggah CV.",
+    "Ringkasan pipeline: jumlah lamaran menurut status saved, applied, screening, interview, offer, rejected, dan withdrawn dengan label Indonesia; memilih status memfilter daftar lamaran.",
+    "Daftar lamaran terbaru: posisi, perusahaan, status, versi CV terkait bila tersedia, dan waktu pembaruan; pencarian posisi atau perusahaan, filter status, pengurutan terbaru, aksi buka detail dan ubah status.",
+    "Tugas yang perlu dilanjutkan: tinjau hasil ekstraksi CV, lengkapi data lowongan, atau periksa draf CV yang belum ditinjau berdasarkan keadaan data; setiap item memiliki aksi menuju pekerjaan terkait.",
+    "Aktivitas terbaru: riwayat penambahan lowongan, perubahan status lamaran, pembaruan CV, dan penyelesaian tugas AI beserta waktu kejadian.",
+    "Kesiapan workspace: keberadaan CV dan status koneksi AI aktif, dengan aksi unggah CV atau buka pengaturan; AI yang belum dikonfigurasi tidak menghalangi pencatatan lowongan dan lamaran.",
+    "Keadaan antarmuka: skeleton saat memuat, empty state dengan langkah unggah CV dan tambah lowongan, hasil filter kosong dengan reset, pesan gagal dengan coba lagi, serta umpan balik sukses setelah perubahan status."
+  ],
+  "constraints": [
+    "Mengacu pada docs/PRD.md, docs/ARCHITECTURE.md, docs/SECURITY.md, docs/specs/AI_INTEGRATION.md, dan docs/implementation/PLAN.md sebagai fakta produk.",
+    "Fokus pada dashboard operasional MVP self-hosted untuk satu pengguna; tanpa bagian marketing, billing, tim, scraping, auto-apply, atau sinkronisasi email.",
+    "Stack telah ditetapkan: Next.js App Router, TypeScript, Tailwind, PostgreSQL/Drizzle, pnpm, dan Docker Compose.",
+    "Skor AI hanya estimasi kecocokan heuristik, bukan skor ATS atau prediksi diterima kerja; jangan tampilkan skor sebelum analisis tersedia.",
+    "Pengiriman CV ke AI memerlukan tindakan eksplisit pengguna dan penjelasan provider serta data yang keluar dari mesin; jangan menampilkan kredensial.",
+    "Jangan membuat klaim pengalaman CV, hasil lamaran, atau statistik pengguna nyata yang tidak tersedia.",
+    "Sediakan label formulir, fokus keyboard yang jelas, kontras terbaca, dan penyajian status yang tidak bergantung pada warna saja.",
+    "Gunakan transisi fungsional untuk filter, pengurutan, navigasi, dan panel; hormati preferensi reduced motion.",
+    "Komposisi desktop dan mobile setiap area harus mengacu pada gambar referensi yang dipilih pada fase desain berikutnya.",
+    "ADR-003 mengenai lisensi dan ADR-004 mengenai workflow penyuntingan CV masih belum diputuskan; desain dashboard tidak perlu menetapkan keduanya."
+  ],
+  "brandInputs": [
+    "Nama produk Lokr, terverifikasi dari docs/PRD.md dan docs/ARCHITECTURE.md.",
+    "Pemeriksaan direktori apps dan packages belum menemukan file implementasi halaman; belum ditemukan logo, aset visual, token warna, atau tipografi yang dapat dijadikan gaya existing."
+  ],
+  "assumptions": [
+    "Bahasa antarmuka awal menggunakan Bahasa Indonesia sesuai bahasa permintaan pengguna.",
+    "Permintaan tampilan dashboard dulu berarti memprioritaskan satu halaman ringkasan, bukan merancang seluruh aplikasi sekaligus.",
+    "Jika diperlukan untuk pratinjau, gunakan data demonstrasi koheren yang diberi label Data contoh; data tersebut bukan riwayat atau pencapaian pengguna nyata.",
+    "Tugas tertunda diturunkan dari keadaan CV, lowongan, dan draf yang tersedia, bukan menambahkan sistem pengingat atau kalender baru.",
+    "Tidak menerapkan minimum delapan bagian karena halaman ini merupakan dashboard operasional.",
+    "Koneksi AI ditampilkan sesuai status sebenarnya atau sebagai belum dikonfigurasi; dukungan provider dan CLI tidak dianggap sudah tersedia."
+  ],
+  "unresolved": [
+    "Referensi visual, palet, tipografi, dan identitas logo belum dipilih; ditentukan pada fase desain berikutnya.",
+    "Workflow penyuntingan CV dan lisensi masih terbuka dalam ADR proyek, tetapi tidak menghalangi desain dashboard."
+  ],
+  "explicitAnswers": []
+}
