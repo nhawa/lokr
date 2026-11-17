@@ -1,4 +1,4 @@
-# Logical data model (DB engine not yet selected)
+# Logical data model
 
 All identifiers UUID/ULID. Timestamp fields UTC; display local time in UI. Sensitive contents remain private; avoid unbounded duplication of CV text.
 
@@ -16,7 +16,14 @@ All identifiers UUID/ULID. Timestamp fields UTC; display local time in UI. Sensi
 | `tailored_resumes` | `id`, `task_id`, `resume_version_id`, `job_id`, `draft_json`, `review_state`, `export_storage_key` | generated drafts |
 | `interview_preparations` | `id`, `task_id`, `job_id`, `resume_version_id`, `questions_json`, `schema_version` | study materials |
 
+## CV API mapping
+
+`/api/v1/resumes` represents logical `resumes`; list items contain label and latest-version lifecycle metadata only. `/versions` represents `resume_versions`. Version detail may expose safe original-document metadata and parsed/owner-edited content, but never `storage_key` or other filesystem details.
+
+A version keeps extraction state separate from owner review state. Parsed text records extractor provenance; owner edits record owner-edit provenance. Updates and review confirmation use a revision token for optimistic concurrency and can record `reviewed_at`. The precise persisted shape remains open: this mapping does not choose ADR-004's file-first or structured-builder editor model.
+
 ## Constraints
+
 - Every user-owned record checked against owner in server-side queries, not just UI.
 - Unique (`resume_id`, `version`); one default AI connection per user; FK validity; indexed `user_id`, `status` and creation dates.
 - Application and job are distinct: a saved job does not equal an application.
@@ -25,4 +32,5 @@ All identifiers UUID/ULID. Timestamp fields UTC; display local time in UI. Sensi
 - Define cascade/restrict delete behavior carefully to avoid accidental CV loss.
 
 ## Migrations
+
 Add versioned migrations from day 1. Backups must include both database and uploaded file volume. Schema names may change during implementation, but keep the domain distinctions.
