@@ -1,48 +1,73 @@
 import { chromium } from '@playwright/test';
+import { z } from 'zod';
+
+import { MAX_DISPLAY_FILENAME_CHARACTERS, MAX_RESUME_CONTENT_CHARACTERS } from '../../../lib/api-contract/common';
+import { problem, problemResponse } from '../../../lib/api-contract/problem';
 import { renderResumeTemplate, toResumeTemplateData } from '../../../lib/resume-template';
 
 export const runtime = 'nodejs';
 
-type ExportRequest = { markdown?: unknown; filename?: unknown; approved?: unknown };
+const exportRequestSchema = z.object({
+  markdown: z.string().trim().min(1).max(MAX_RESUME_CONTENT_CHARACTERS),
+  filename: z.string().max(MAX_DISPLAY_FILENAME_CHARACTERS).optional(),
+}).strict();
 
 async function launchPdfBrowser() {
   try {
     return await chromium.launch({ headless: true });
-  } catch (chromiumError) {
-    try {
-      // Chrome is Chromium-based and provides a supported local fallback when
-      // Playwright's separately installed browser binary is unavailable.
-      return await chromium.launch({ channel: 'chrome', headless: true });
-    } catch (chromeError) {
-      const chromiumMessage = chromiumError instanceof Error ? chromiumError.message : 'Chromium could not start.';
-      const chromeMessage = chromeError instanceof Error ? chromeError.message : 'Chrome could not start.';
-      throw new Error(`${chromiumMessage}\nFallback Chrome launch also failed: ${chromeMessage}`);
-    }
+  } catch {
+    return chromium.launch({ channel: 'chrome', headless: true });
   }
 }
 
-function safeFilename(value: unknown) {
-  const name = typeof value === 'string' ? value.replace(/[^a-z0-9-_]+/gi, '-').replace(/^-+|-+$/g, '') : '';
+function safeFilename(value: unknown): string {
+  const input = typeof value === 'string' ? value.slice(0, MAX_DISPLAY_FILENAME_CHARACTERS) : '';
+  const name = input.replace(/[^a-z0-9-_]+/gi, '-').replace(/^-+|-+$/g, '');
   return `${name || 'tailored-cv'}.pdf`;
 }
 
-export async function POST(request: Request) {
-  let body: ExportRequest;
-  try { body = await request.json() as ExportRequest; } catch { return Response.json({ error: 'The export request must be valid JSON.' }, { status: 400 }); }
-  if (body.approved !== true) return Response.json({ error: 'Approve the CV version before exporting it.' }, { status: 409 });
-  if (typeof body.markdown !== 'string' || !body.markdown.trim() || body.markdown.length > 100_000) return Response.json({ error: 'The reviewed CV content is missing or too large.' }, { status: 400 });
+function requestId(): string {
+  return crypto.randomUUID();
+}
 
-  let browser;
+export async function POST(request: Request): Promise<Response> {
+  const id = requestId();
+  let body: unknown;
+
+  try {
+    body = await request.json();
+  } catch {
+    return problemResponse(problem('export_request_invalid', id));
+  }
+
+  const parsed = exportRequestSchema.safeParse(body);
+  if (!parsed.success) {
+    return problemResponse(problem('export_request_invalid', id));
+  }
+
+  let browser: Awaited<ReturnType<typeof chromium.launch>> | undefined;
   try {
     browser = await launchPdfBrowser();
     const page = await browser.newPage();
-    await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>CV</title></head><body>${renderResumeTemplate(toResumeTemplateData(body.markdown))}</body></html>`, { waitUntil: 'load' });
+    await page.setContent(`<!doctype html><html><head><meta charset="utf-8"><title>CV</title></head><body>${renderResumeTemplate(toResumeTemplateData(parsed.data.markdown))}</body></html>`, { waitUntil: 'load' });
     const pdf = await page.pdf({ format: 'Letter', printBackground: true, preferCSSPageSize: true, displayHeaderFooter: false });
-    return new Response(Uint8Array.from(pdf), { headers: { 'Content-Type': 'application/pdf', 'Content-Disposition': `attachment; filename="${safeFilename(body.filename)}"`, 'Cache-Control': 'no-store' } });
-  } catch (error) {
-    console.error('CV PDF export failed:', error instanceof Error ? error.message : 'Unknown error');
-    return Response.json({ error: 'PDF export is unavailable. Install Playwright Chromium, or install Google Chrome for the local fallback.' }, { status: 503 });
+    return new Response(Uint8Array.from(pdf), {
+      headers: {
+        'Content-Type': 'application/pdf',
+        'Content-Disposition': `attachment; filename="${safeFilename(parsed.data.filename)}"`,
+        'Cache-Control': 'no-store',
+      },
+    });
+  } catch {
+    console.error('CV PDF export failed: browser_unavailable');
+    return problemResponse(problem('export_unavailable', id));
   } finally {
-    try { await browser?.close(); } catch { /* A crashed browser must not replace the controlled 503 response. */ }
+    if (browser) {
+      try {
+        await browser.close();
+      } catch {
+        // Cleanup failures must not replace the primary response.
+      }
+    }
   }
 }
