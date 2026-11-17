@@ -1,50 +1,57 @@
 {
-  "originalRequest": "cek project ini dan buatkan tampilan dashboardnya dulu",
-  "subject": "Dashboard Lokr, workspace pribadi self-hosted untuk mengelola CV, lowongan, lamaran, dan persiapan wawancara.",
+  "originalRequest": "lanjutkan implementasi ui sesuai wireframe.",
+  "subject": "Lokr, a self-hosted personal workspace for managing CVs, saved jobs, applications, and interview preparation.",
   "pageType": "dashboard",
-  "scope": "Desain awal halaman dashboard utama beserta navigasi aplikasi, tampilan desktop dan mobile, serta keadaan loading, kosong, gagal, dan berisi data. Halaman modul lain cukup diwakili tujuan navigasi, bukan dirancang lengkap pada tahap ini.",
-  "primaryGoal": "Membantu pencari kerja melihat perkembangan lamaran, mengenali pekerjaan yang belum selesai, dan melanjutkan aktivitas pencarian kerja dari satu halaman.",
-  "audience": "Pencari kerja individual yang mengelola data dan proses lamarannya sendiri, satu pemilik per instalasi.",
-  "offer": "Workspace privat yang menyatukan versi CV, lowongan tersimpan, status lamaran, analisis kecocokan berbasis bukti, dan persiapan wawancara, dengan AI opsional yang dipicu pengguna.",
-  "primaryAction": "Tambah lowongan secara manual, lalu lanjutkan pengelolaan lamaran dari dashboard.",
-  "creativeControl": "Kendali kreatif luas untuk desain dashboard baru yang jelas, mudah dipindai, dan berorientasi tindakan. Warna, tipografi, serta komposisi ditentukan setelah pemilihan referensi visual, dengan tetap mengikuti ruang lingkup MVP.",
+  "scope": "Extend the existing Lokr interface into twelve connected operational screens based on the supplied wireframe, while preserving the current dashboard, interaction model, responsive shell, and honest local-data boundaries.",
+  "primaryGoal": "Help an individual job seeker move from saved job to reviewed CV, tracked application, and interview preparation through a coherent workspace.",
+  "audience": "Individual job seekers using one self-hosted workspace.",
+  "offer": "A private workspace that connects CV versions, jobs, applications, and interview preparation without overstating AI capabilities or backend persistence.",
+  "primaryAction": "Add or save a job, then continue managing its application from the workspace.",
+  "creativeControl": "Moderate. Retain the existing Lokr visual language and recompose the product workflows to follow the supplied wireframe. Use the wireframe as a layout and information-architecture reference, while preserving accessible controls, honest product states, and current security boundaries.",
   "requiredContent": [
-    "Navigasi aplikasi: Dashboard, CV Saya, Lowongan, Lamaran, Persiapan Wawancara, dan Pengaturan; indikator halaman aktif serta navigasi ringkas pada mobile.",
-    "Header dashboard: judul Ringkasan, konteks workspace pribadi, tombol utama Tambah lowongan, dan aksi sekunder Unggah CV.",
-    "Ringkasan pipeline: jumlah lamaran menurut status saved, applied, screening, interview, offer, rejected, dan withdrawn dengan label Indonesia; memilih status memfilter daftar lamaran.",
-    "Daftar lamaran terbaru: posisi, perusahaan, status, versi CV terkait bila tersedia, dan waktu pembaruan; pencarian posisi atau perusahaan, filter status, pengurutan terbaru, aksi buka detail dan ubah status.",
-    "Tugas yang perlu dilanjutkan: tinjau hasil ekstraksi CV, lengkapi data lowongan, atau periksa draf CV yang belum ditinjau berdasarkan keadaan data; setiap item memiliki aksi menuju pekerjaan terkait.",
-    "Aktivitas terbaru: riwayat penambahan lowongan, perubahan status lamaran, pembaruan CV, dan penyelesaian tugas AI beserta waktu kejadian.",
-    "Kesiapan workspace: keberadaan CV dan status koneksi AI aktif, dengan aksi unggah CV atau buka pengaturan; AI yang belum dikonfigurasi tidak menghalangi pencatatan lowongan dan lamaran.",
-    "Keadaan antarmuka: skeleton saat memuat, empty state dengan langkah unggah CV dan tambah lowongan, hasil filter kosong dengan reset, pesan gagal dengan coba lagi, serta umpan balik sukses setelah perubahan status."
+    "Shared application shell: Lokr mark, labelled sidebar navigation for Dashboard, CV Manager, Jobs, Applications, Interview Prep, and Settings, with responsive mobile navigation.",
+    "Dashboard: summary counts for saved jobs, applications, interviews, and offers; application pipeline; upcoming interviews; continuation tasks; recent applications; activity; and workspace readiness.",
+    "CV Manager: CV upload area, document list with name, updated date, type, and actions, plus review-state visibility.",
+    "CV Detail, Editor, and Preview: editable CV fields, structured sections, preview pane, save action, version context, and review-safe sample content.",
+    "Jobs list and saved jobs: search, saved-jobs view, role, location, and type filters, job rows, and explicit saved state.",
+    "Job Detail: job title, company metadata, saved state, overview, requirements, and separate editable notes.",
+    "AI CV Match Analysis: explicit analysis action, heuristic match estimate only, source CV and job context, strengths and gaps, provider and data-sharing disclosure before any analysis.",
+    "Tailored CV Workspace: original and tailored CV comparison, editable draft context, provenance and review status, with export actions only when a real export capability exists.",
+    "Applications Tracker: stage-based board for Saved, Applied, Interview, Offer, and Rejected applications, accessible status changes, application creation, and stable card identities.",
+    "Application Detail: overview, status control, timeline, notes, reminders, and application history derived from local actions.",
+    "Interview Prep Setup: job and CV selection, manually chosen focus areas, and explicit start-practice action.",
+    "Interview Practice: question, guidance, manual answer field, optional recording or feedback controls only when supported, and no fabricated AI feedback.",
+    "Settings: honest AI connection status, privacy explanation, and future configuration space without fake provider credentials, test connections, or unsafe local-runner controls."
   ],
   "constraints": [
-    "Mengacu pada docs/PRD.md, docs/ARCHITECTURE.md, docs/SECURITY.md, docs/specs/AI_INTEGRATION.md, dan docs/implementation/PLAN.md sebagai fakta produk.",
-    "Fokus pada dashboard operasional MVP self-hosted untuk satu pengguna; tanpa bagian marketing, billing, tim, scraping, auto-apply, atau sinkronisasi email.",
-    "Stack telah ditetapkan: Next.js App Router, TypeScript, Tailwind, PostgreSQL/Drizzle, pnpm, dan Docker Compose.",
-    "Skor AI hanya estimasi kecocokan heuristik, bukan skor ATS atau prediksi diterima kerja; jangan tampilkan skor sebelum analisis tersedia.",
-    "Pengiriman CV ke AI memerlukan tindakan eksplisit pengguna dan penjelasan provider serta data yang keluar dari mesin; jangan menampilkan kredensial.",
-    "Jangan membuat klaim pengalaman CV, hasil lamaran, atau statistik pengguna nyata yang tidak tersedia.",
-    "Sediakan label formulir, fokus keyboard yang jelas, kontras terbaca, dan penyajian status yang tidak bergantung pada warna saja.",
-    "Gunakan transisi fungsional untuk filter, pengurutan, navigasi, dan panel; hormati preferensi reduced motion.",
-    "Komposisi desktop dan mobile setiap area harus mengacu pada gambar referensi yang dipilih pada fase desain berikutnya.",
-    "ADR-003 mengenai lisensi dan ADR-004 mengenai workflow penyuntingan CV masih belum diputuskan; desain dashboard tidak perlu menetapkan keduanya."
+    "Extend the existing Next.js application. Do not replace its framework, shell, local fonts, or existing interaction model.",
+    "All visible application terms and user-facing copy must be English.",
+    "Preserve the existing Achromatic ledger and open-plane visual system: neutral chrome, flat white surfaces, near-black primary action, and blue #1d5fbf reserved for primary data.",
+    "Do not add marketing sections, fabricated users, employers, outcomes, testimonials, hiring predictions, or real-world affiliations.",
+    "Keep representative content visibly identified as sample data until replaced with real user data.",
+    "AI matching remains a heuristic estimate, never an ATS score or hiring prediction.",
+    "Do not send CV or job content to an AI provider without explicit user action, named provider, and clear disclosure of data leaving the machine.",
+    "Do not create fake API-key, provider-test, CLI-runner, server-sync, export, or persistence behavior when no supporting backend exists.",
+    "Maintain loading, empty, zero, error, and success states; keyboard access; visible focus; responsive desktop, tablet, and mobile layouts; and reduced-motion behavior.",
+    "ADR-003 and ADR-004 remain undecided and must not be silently resolved by the UI."
   ],
   "brandInputs": [
-    "Nama produk Lokr, terverifikasi dari docs/PRD.md dan docs/ARCHITECTURE.md.",
-    "Pemeriksaan direktori apps dan packages belum menemukan file implementasi halaman; belum ditemukan logo, aset visual, token warna, atau tipografi yang dapat dijadikan gaya existing."
+    "Existing apps/web/src/styles/kit.css: Achromatic ledger tokens, Geist and Geist Mono local font loading, neutral off-white ground, white cards, near-black controls, and blue #1d5fbf data accent.",
+    "Existing apps/web/src/components/workspace.tsx: Lokr CSS mark, labelled sidebar shell, hash routes, English navigation labels, and current dashboard-level local interactions.",
+    "Supplied twelve-screen wireframe: desktop information architecture and composition reference for Dashboard, CV management, jobs, applications, interview preparation, and settings."
   ],
   "assumptions": [
-    "Bahasa antarmuka awal menggunakan Bahasa Indonesia sesuai bahasa permintaan pengguna.",
-    "Permintaan tampilan dashboard dulu berarti memprioritaskan satu halaman ringkasan, bukan merancang seluruh aplikasi sekaligus.",
-    "Jika diperlukan untuk pratinjau, gunakan data demonstrasi koheren yang diberi label Data contoh; data tersebut bukan riwayat atau pencapaian pengguna nyata.",
-    "Tugas tertunda diturunkan dari keadaan CV, lowongan, dan draf yang tersedia, bukan menambahkan sistem pengingat atau kalender baru.",
-    "Tidak menerapkan minimum delapan bagian karena halaman ini merupakan dashboard operasional.",
-    "Koneksi AI ditampilkan sesuai status sebenarnya atau sebagai belum dikonfigurasi; dukungan provider dan CLI tidak dianggap sudah tersedia."
+    "The wireframe’s names, companies, dates, counts, and scores are illustrative concept content. They will be replaced by the existing clearly labelled sample dataset until real user data is available.",
+    "Continuing implementation means expanding the current dashboard into twelve connected operational views, not claiming that backend storage, AI analysis, exports, audio recording, or external provider integrations already work.",
+    "The existing dashboard priority remains adding or saving a job before managing its linked application.",
+    "Status changes, filters, tabs, board movements, drawers, and dialogs receive functional transitions only. The interface has no decorative page entrances.",
+    "Wireframe controls for API keys, provider testing, and local CLI runners are replaced with truthful unavailable or status-only states until secure backend support is implemented.",
+    "Visible English copy applies to all current and new views, including statuses, form labels, errors, empty states, and navigation."
   ],
   "unresolved": [
-    "Referensi visual, palet, tipografi, dan identitas logo belum dipilih; ditentukan pada fase desain berikutnya.",
-    "Workflow penyuntingan CV dan lisensi masih terbuka dalam ADR proyek, tetapi tidak menghalangi desain dashboard."
+    "A secure, real AI provider configuration and analysis workflow requires backend implementation and explicit user invocation.",
+    "No real CVs, jobs, applications, reminders, or interview material have been supplied, so the interface must continue using illustrative sample data.",
+    "ADR-004 still governs the final tailored-CV editing workflow and should remain reversible in the UI."
   ],
   "explicitAnswers": []
 }

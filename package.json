@@ -1,0 +1,13 @@
+{
+  "name": "lokr",
+  "private": true,
+  "packageManager": "pnpm@11.22.0",
+  "scripts": {
+    "dev": "pnpm --filter @lokr/web dev",
+    "build": "pnpm --filter @lokr/web build",
+    "typecheck": "pnpm --filter @lokr/web typecheck",
+    "lint": "pnpm --filter @lokr/web lint",
+    "test": "pnpm --filter @lokr/web test",
+    "test:e2e": "pnpm --filter @lokr/web test:e2e"
+  }
+}
