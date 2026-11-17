@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "font-geist",
+      "kind": "font",
+      "status": "ready",
+      "purpose": "Primary interface typeface for the complete Lokr workspace.",
+      "requirements": [
+        "Variable upright font with weights 400, 500, and 700 available.",
+        "Local file verified as TrueType with magic bytes 00010000.",
+        "SIL Open Font License 1.1 is stored beside the font.",
+        "Build must verify document.fonts.ready, a loaded Geist FontFace, document.fonts.check, and tabular-number rendering."
+      ],
+      "role": "font",
+      "sectionIds": [
+        "shell",
+        "dashboard-heading",
+        "dashboard-counts",
+        "dashboard-pipeline",
+        "dashboard-next-work",
+        "dashboard-recent-applications",
+        "dashboard-upcoming-interviews",
+        "dashboard-activity",
+        "dashboard-readiness",
+        "cv-manager",
+        "cv-detail-editor",
+        "jobs-list",
+        "job-detail",
+        "cv-match-analysis",
+        "tailored-cv-workspace",
+        "applications-tracker",
+        "application-detail",
+        "interview-prep-setup",
+        "interview-practice",
+        "settings-view"
+      ],
+      "source": {
+        "kind": "project",
+        "reference": "apps/web/public/fonts/geist/Geist[wght].ttf",
+        "license": "SIL Open Font License 1.1. Original Google Fonts source commit and SHA-256 are recorded in apps/web/public/fonts/PROVENANCE.json.",
+        "contentType": "application/octet-stream"
+      },
+      "destination": "apps/web/public/fonts/geist/Geist[wght].ttf"
+    },
+    {
+      "id": "font-geist-mono",
+      "kind": "font",
+      "status": "ready",
+      "purpose": "Monospace typeface for non-sensitive object IDs and keys only.",
+      "requirements": [
+        "Variable upright font with weight 400 available.",
+        "Local file verified as TrueType with magic bytes 00010000.",
+        "SIL Open Font License 1.1 is stored beside the font.",
+        "Use only for visible non-sensitive IDs and keys, never as the general interface face. Build must verify loaded FontFace and document.fonts.check."
+      ],
+      "role": "font",
+      "sectionIds": [
+        "cv-manager",
+        "cv-detail-editor",
+        "jobs-list",
+        "job-detail",
+        "applications-tracker",
+        "application-detail",
+        "tailored-cv-workspace"
+      ],
+      "source": {
+        "kind": "project",
+        "reference": "apps/web/public/fonts/geistmono/GeistMono[wght].ttf",
+        "license": "SIL Open Font License 1.1. Original Google Fonts source commit and SHA-256 are recorded in apps/web/public/fonts/PROVENANCE.json.",
+        "contentType": "application/octet-stream"
+      },
+      "destination": "apps/web/public/fonts/geistmono/GeistMono[wght].ttf"
+    }
+  ]
+}

@@ -8,6 +8,7 @@
 *.secret
 # Data and runtime
 node_modules/
+.pnpm-store/
 .next/
 dist/
 build/
@@ -25,3 +26,7 @@ uploads/
 .DS_Store
 .idea/
 .vscode/
+out/
+*.tsbuildinfo
+playwright-report/
+test-results/

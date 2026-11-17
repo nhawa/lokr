@@ -1,0 +1,68 @@
+{
+  "repository": "https://github.com/google/fonts",
+  "commit": "cc39c4c2c304bc368c9b7c311ea2bcc6013299fe",
+  "files": [
+    {
+      "destination": "apps/web/public/fonts/geist/Geist[wght].ttf",
+      "sourcePage": "https://github.com/google/fonts/blob/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geist/Geist%5Bwght%5D.ttf",
+      "downloadUrl": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geist/Geist%5Bwght%5D.ttf",
+      "contentType": "application/octet-stream",
+      "bytes": 169056,
+      "sha256": "73894e0448cae90a92b6c2f8732b7bb9acb7b94c418bff559dad4a18e1de9659",
+      "magic": "00010000",
+      "axes": [
+        {
+          "tag": "wght",
+          "min": 100.0,
+          "default": 400.0,
+          "max": 900.0
+        }
+      ],
+      "names": [
+        "Geist",
+        "Regular"
+      ],
+      "hasGSUB": true
+    },
+    {
+      "destination": "apps/web/public/fonts/geist/OFL.txt",
+      "sourcePage": "https://github.com/google/fonts/blob/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geist/OFL.txt",
+      "downloadUrl": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geist/OFL.txt",
+      "contentType": "text/plain; charset=utf-8",
+      "bytes": 4387,
+      "sha256": "1781d2806a07d91c4edf4740b88449fab7d0eadad53f7c351b94cd4d4eb8c00f",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "destination": "apps/web/public/fonts/geistmono/GeistMono[wght].ttf",
+      "sourcePage": "https://github.com/google/fonts/blob/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geistmono/GeistMono%5Bwght%5D.ttf",
+      "downloadUrl": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geistmono/GeistMono%5Bwght%5D.ttf",
+      "contentType": "application/octet-stream",
+      "bytes": 171948,
+      "sha256": "d00e590b8eb3a59acc329b2d044fd143ae935090b7da33199ebee27cc7de8196",
+      "magic": "00010000",
+      "axes": [
+        {
+          "tag": "wght",
+          "min": 100.0,
+          "default": 400.0,
+          "max": 900.0
+        }
+      ],
+      "names": [
+        "Geist Mono",
+        "Regular"
+      ],
+      "hasGSUB": true
+    },
+    {
+      "destination": "apps/web/public/fonts/geistmono/OFL.txt",
+      "sourcePage": "https://github.com/google/fonts/blob/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geistmono/OFL.txt",
+      "downloadUrl": "https://raw.githubusercontent.com/google/fonts/cc39c4c2c304bc368c9b7c311ea2bcc6013299fe/ofl/geistmono/OFL.txt",
+      "contentType": "text/plain; charset=utf-8",
+      "bytes": 4387,
+      "sha256": "1781d2806a07d91c4edf4740b88449fab7d0eadad53f7c351b94cd4d4eb8c00f",
+      "license": "SIL Open Font License 1.1"
+    }
+  ]
+}

@@ -1,0 +1,1129 @@
+{
+  "version": 1,
+  "page": {
+    "title": "Overview",
+    "route": "/",
+    "description": "Lokr workspace overview for tracking jobs, CV versions, applications, and interview preparation."
+  },
+  "architecture": {
+    "contract": "This screen answers: what job-search work should I continue now? Finding: three saved applications need a next step.",
+    "mode": "operate_monitor",
+    "novelty": "medium",
+    "grid": "At 1440px: 256px sidebar + 24px left canvas margin + 1136px canvas + 24px right canvas margin = 1440px. The canvas has 12 columns with 12px gaps: 12 × 83.6667px + 11 × 12px = 1136px. Dashboard pairs use 8 columns at 753.333px + 12px + 4 columns at 370.667px = 1136px.",
+    "signatureRule": "Achromatic chrome, flat white surfaces, and one blue data hue. The Lokr application trail always presents job, CV version, then application stage. Blue marks the selected stage or primary data series only.",
+    "rhythm": "Sparse: 24px canvas and card padding, 12px horizontal and vertical gap, 44px standard rows, 63px object rows where a second line is needed, 36px visual controls inside 44px hit targets, 14px body text, 12px metadata, 16px section headings, and 24px h1."
+  },
+  "navigation": [
+    {
+      "label": "Dashboard",
+      "target": "#/dashboard"
+    },
+    {
+      "label": "My CVs",
+      "target": "#/cv"
+    },
+    {
+      "label": "Jobs",
+      "target": "#/jobs"
+    },
+    {
+      "label": "Applications",
+      "target": "#/applications"
+    },
+    {
+      "label": "Interview prep",
+      "target": "#/interviews"
+    },
+    {
+      "label": "Settings",
+      "target": "#/settings"
+    }
+  ],
+  "navigationDesign": {
+    "layoutCase": "app-shell",
+    "layout": "Existing labelled open-plane sidebar at 256px with the Lokr document-corner mark, Lokr, Personal workspace, six labelled routes, and local-owner context at the bottom. Desktop has no top bar.",
+    "behavior": [
+      "#/dashboard is the default route. Every destination renders as its own view, never an in-page anchor.",
+      "The active destination uses aria-current and a neutral raised fill. Hover remains neutral and focus uses a near-black outline.",
+      "On mobile, a 48px top bar opens a full-screen navigation sheet. Escape closes the sheet and focus returns to the menu button.",
+      "Back and Forward restore the hash route and its local filter or detail state where available.",
+      "Workspace and owner labels are text, not non-functional controls."
+    ],
+    "transformation": {
+      "compact": "At 640px and below, the sidebar becomes a 48px top bar with menu and current view name. The content has 16px margins.",
+      "medium": "From 641px to 1100px, navigation remains in the full-screen sheet so lists retain usable width.",
+      "expanded": "Above 1100px, the labelled 256px sidebar stays visible and the canvas uses 24px margins."
+    }
+  },
+  "sections": [
+    {
+      "id": "shell",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-shell"
+      ],
+      "purpose": "Identify the Lokr workspace and move between real product views.",
+      "userQuestion": "Where am I, and where can I work next?",
+      "stage": "orient",
+      "dependencies": [],
+      "evidence": [
+        "README.md",
+        "apps/web/src/components/workspace.tsx"
+      ],
+      "copy": {
+        "heading": "Lokr",
+        "body": [
+          "Personal workspace",
+          "Local owner"
+        ],
+        "callsToAction": [
+          {
+            "label": "Dashboard",
+            "target": "#/dashboard"
+          },
+          {
+            "label": "My CVs",
+            "target": "#/cv"
+          },
+          {
+            "label": "Jobs",
+            "target": "#/jobs"
+          },
+          {
+            "label": "Applications",
+            "target": "#/applications"
+          },
+          {
+            "label": "Interview prep",
+            "target": "#/interviews"
+          },
+          {
+            "label": "Settings",
+            "target": "#/settings"
+          }
+        ]
+      },
+      "layout": "Shared labelled sidebar. Navigation items are 44px touch targets with a 16px outline icon and 14px text. Settings and owner context sit at the bottom.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Active route changes with neutral selected feedback. The mobile sheet opens and closes without page entrance motion.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Route and navigation-sheet states change immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show a menu button and current view name in a 48px bar. The full-screen sheet contains the mark, workspace context, and all destinations.",
+        "medium": "Use the compact navigation treatment while retaining 24px content margins.",
+        "expanded": "Show the persistent labelled sidebar."
+      }
+    },
+    {
+      "id": "dashboard-heading",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "workspace-home-greeting",
+        "app-screen"
+      ],
+      "purpose": "State the immediate finding and expose the most frequent job.",
+      "userQuestion": "What should I continue now?",
+      "stage": "act",
+      "dependencies": [
+        "shell"
+      ],
+      "evidence": [
+        "workspace-data.ts: saved applications and derived tasks"
+      ],
+      "copy": {
+        "heading": "Overview",
+        "body": [
+          "Three saved applications need a next step.",
+          "Sample data · 12 applications"
+        ],
+        "callsToAction": [
+          {
+            "label": "Add job",
+            "target": "#/jobs/new"
+          },
+          {
+            "label": "Upload CV",
+            "target": "#/cv/upload"
+          },
+          {
+            "label": "View saved",
+            "target": "#/applications?stage=saved"
+          }
+        ]
+      },
+      "layout": "Full 12-column title row with one h1, finding, quiet Sample data notice, near-black Add job primary action, and neutral Upload CV secondary action.",
+      "motion": {
+        "purpose": "feedback",
+        "trigger": "press",
+        "behavior": "Actions respond to press and route changes without replaying an entrance.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Feedback is immediate."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Keep Add job visible. Move Upload CV into the action menu when needed. The first application content begins before 60% of the viewport.",
+        "medium": "Allow actions to wrap beneath the finding without reducing text size.",
+        "expanded": "Align the title row to the 12-column canvas edges."
+      }
+    },
+    {
+      "id": "dashboard-counts",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "workspace-home-greeting"
+      ],
+      "purpose": "Give a quick truthful count of work at each major milestone.",
+      "userQuestion": "How much work is saved, active, in interview, or offered?",
+      "stage": "evaluate",
+      "dependencies": [
+        "dashboard-heading"
+      ],
+      "evidence": [
+        "workspace-data.ts: counts"
+      ],
+      "copy": {
+        "heading": "Application counts",
+        "body": [
+          "Sample data · 3 saved jobs · 12 applications · 2 interviews · 0 offers"
+        ],
+        "callsToAction": [
+          {
+            "label": "Open applications",
+            "target": "#/applications"
+          }
+        ]
+      },
+      "layout": "A single 12-column divided KPI strip with four equal cells: Saved jobs 3, Applications 12, Interviews 2, Offers 0. Values are computed from applications, use tabular figures, and have no deltas or icons.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Counts recompute after adding a job or changing an application stage.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Values update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Use a two-by-two divided grid without empty cells.",
+        "medium": "Keep four cells in one or two rows according to available width.",
+        "expanded": "Keep the four-cell divided strip across the full canvas."
+      }
+    },
+    {
+      "id": "dashboard-pipeline",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Show the distribution of applications by stage and filter related work.",
+      "userQuestion": "Where are my applications in the process?",
+      "stage": "evaluate",
+      "dependencies": [
+        "dashboard-counts"
+      ],
+      "evidence": [
+        "workspace-data.ts: stages and counts"
+      ],
+      "copy": {
+        "heading": "Application pipeline",
+        "body": [
+          "Sample data · Saved 3 · Applied 3 · Screening 2 · Interview 2 · Offer 0 · Rejected 1 · Withdrawn 1"
+        ],
+        "callsToAction": [
+          {
+            "label": "View all applications",
+            "target": "#/applications"
+          },
+          {
+            "label": "Saved",
+            "target": "#/dashboard?stage=saved"
+          }
+        ]
+      },
+      "layout": "Eight-column panel, approximately 236px high. A seven-category vertical bar chart uses an integer y-scale from 0 to 4. Saved is blue by default, every other bar is ink, and zero Offer is a muted baseline label. Each stage is a 44px minimum button that filters the dashboard application list. No legend duplicates the labels.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "press",
+        "behavior": "Selecting a stage updates its neutral outline, the blue data mark, the visible result count, and the related application rows while retaining the same y-scale.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Selection and marks update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Replace the chart with a horizontally scrollable stage strip. Each stage shows its text label and count, and the selected count remains blue.",
+        "medium": "Keep the chart if the panel remains at least 340px wide. Long labels may wrap to two lines.",
+        "expanded": "Show the full chart with labels and integer scale."
+      }
+    },
+    {
+      "id": "dashboard-next-work",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "workspace-home-greeting",
+        "app-screen"
+      ],
+      "purpose": "Turn pending document and job states into concrete next actions.",
+      "userQuestion": "Which documents or jobs need attention?",
+      "stage": "act",
+      "dependencies": [
+        "dashboard-pipeline"
+      ],
+      "evidence": [
+        "workspace-data.ts: tasks"
+      ],
+      "copy": {
+        "heading": "Continue working",
+        "body": [
+          "Sample data · 3 tasks · Review extraction: Backend CV v2 · Complete description: Northline · Review draft: System Foundry draft"
+        ],
+        "callsToAction": [
+          {
+            "label": "Review extraction",
+            "target": "#/cv/CV02"
+          },
+          {
+            "label": "Complete description",
+            "target": "#/jobs/J01"
+          },
+          {
+            "label": "Review draft",
+            "target": "#/cv/D01"
+          }
+        ]
+      },
+      "layout": "Four-column panel beside the pipeline. Show three 44px action rows with an object name and an explicit text action. Tasks are derived from pending review or missing job description state, not stored as separate counts.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Completing a task removes only that row and updates counts and activity without replaying the card.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Rows update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show a concise task count and one Review action above the application list. Open all tasks in a sheet.",
+        "medium": "Pair with the pipeline only when both panels remain at least 340px wide; otherwise place it before the list.",
+        "expanded": "Keep three task rows beside the pipeline with aligned panel bottoms."
+      }
+    },
+    {
+      "id": "dashboard-recent-applications",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Open or update recently changed applications while preserving the link to their CV version.",
+      "userQuestion": "Which applications changed most recently, and which CV did each use?",
+      "stage": "act",
+      "dependencies": [
+        "dashboard-pipeline",
+        "dashboard-next-work"
+      ],
+      "evidence": [
+        "workspace-data.ts: filteredApplications"
+      ],
+      "copy": {
+        "heading": "Recent applications",
+        "body": [
+          "Sample data · 5 of 12 applications · Backend Engineer at Northline · Not linked · Saved · 15 Nov, 09:10"
+        ],
+        "callsToAction": [
+          {
+            "label": "View all",
+            "target": "#/applications"
+          },
+          {
+            "label": "Open application",
+            "target": "#/applications/A01"
+          },
+          {
+            "label": "Change stage",
+            "target": "#/applications/A01?edit=stage"
+          }
+        ]
+      },
+      "layout": "Eight-column table panel with search, sort, current-stage filter, five 44px rows, and a compact footer. Columns are Role, CV, Stage, Updated, and action. Company is the role subline. The job, CV, and stage application trail appears in row detail. Search matches role and company. Sort uses updatedAt and stable ID tie-breaks.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Filtering and sorting preserve row identity, update the count, and move rows with short interruptible feedback.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Results update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Turn the table into two-line rows. Line one holds role and stage. Line two holds company, CV, and update time. Search and Filter share one control row.",
+        "medium": "Keep four data columns with company and CV as sublines. The panel spans full width when a side panel would become narrow.",
+        "expanded": "Keep the five-column table and five-row cap."
+      }
+    },
+    {
+      "id": "dashboard-upcoming-interviews",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "workspace-home-greeting",
+        "app-screen"
+      ],
+      "purpose": "Surface interview-stage applications as preparation work without inventing appointment data.",
+      "userQuestion": "Which applications are ready for interview preparation?",
+      "stage": "continue",
+      "dependencies": [
+        "dashboard-recent-applications"
+      ],
+      "evidence": [
+        "workspace-data.ts: interview applications"
+      ],
+      "copy": {
+        "heading": "Interview preparation",
+        "body": [
+          "Sample data · 2 applications · Platform Engineer at Infrastructure Loop · Backend Engineer at Current Apps"
+        ],
+        "callsToAction": [
+          {
+            "label": "Prepare interview",
+            "target": "#/interviews/A05"
+          },
+          {
+            "label": "Open applications",
+            "target": "#/applications?stage=interview"
+          }
+        ]
+      },
+      "layout": "Four-column panel with two 63px rows. Each row shows role, company, current stage, and a Prepare interview action. It shows no fictional appointment date or reminder.",
+      "motion": {
+        "purpose": "feedback",
+        "trigger": "press",
+        "behavior": "Opening preparation keeps the selected application context through the route.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Route changes immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Move above activity because it carries a next action.",
+        "medium": "Pair with activity if both panels remain at least 340px wide, otherwise stack.",
+        "expanded": "Place in the right column under the application list header."
+      }
+    },
+    {
+      "id": "dashboard-activity",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "workspace-home-greeting",
+        "app-screen"
+      ],
+      "purpose": "Show evidence of the latest changes in the local workspace.",
+      "userQuestion": "What changed most recently?",
+      "stage": "prove",
+      "dependencies": [
+        "dashboard-recent-applications"
+      ],
+      "evidence": [
+        "workspace-data.ts: events"
+      ],
+      "copy": {
+        "heading": "Recent activity",
+        "body": [
+          "Sample data · 3 events · Northline saved, 15 Nov 09:10 · System Foundry draft updated, 15 Nov 08:50 · CV extraction ready for review, 14 Nov 16:20"
+        ],
+        "callsToAction": [
+          {
+            "label": "Open Northline",
+            "target": "#/jobs/J01"
+          },
+          {
+            "label": "Open draft",
+            "target": "#/cv/D01"
+          },
+          {
+            "label": "Review extraction",
+            "target": "#/cv/CV02"
+          }
+        ]
+      },
+      "layout": "Four-column panel with a three-row event list. Events are absolute Asia/Makassar timestamps and link to the changed object. Do not add a decorative timeline.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "A successful local action inserts its new event at the top without replaying older events.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "The list updates immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show three 44px event rows after applications.",
+        "medium": "Pair with interview preparation only if both columns remain usable.",
+        "expanded": "Keep the card in the right-side stack."
+      }
+    },
+    {
+      "id": "dashboard-readiness",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "workspace-home-greeting",
+        "app-screen"
+      ],
+      "purpose": "Clarify document readiness and AI configuration without blocking manual work.",
+      "userQuestion": "Is a CV available, and is AI configured?",
+      "stage": "de_risk",
+      "dependencies": [
+        "dashboard-activity"
+      ],
+      "evidence": [
+        "workspace-data.ts: resumes",
+        "README.md: AI boundaries"
+      ],
+      "copy": {
+        "heading": "Workspace readiness",
+        "body": [
+          "Sample data · Primary CV: Backend CV v1, reviewed · AI: not configured"
+        ],
+        "callsToAction": [
+          {
+            "label": "Open CVs",
+            "target": "#/cv"
+          },
+          {
+            "label": "Open settings",
+            "target": "#/settings"
+          }
+        ]
+      },
+      "layout": "Four-column key-value card with two 44px rows. AI not configured is a valid neutral state, not an error. No percentage readiness indicator.",
+      "motion": {
+        "purpose": "feedback",
+        "trigger": "press",
+        "behavior": "Navigation actions provide shared press feedback only.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Feedback is immediate."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Place after activity and keep the card content-sized.",
+        "medium": "Stack below activity if the paired cards would be narrow.",
+        "expanded": "Place below activity with the combined right-side height aligned to the applications panel."
+      }
+    },
+    {
+      "id": "cv-manager",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Manage uploaded CVs and drafts, and choose which document needs review.",
+      "userQuestion": "Which CV versions and drafts are available or need review?",
+      "stage": "act",
+      "dependencies": [
+        "shell"
+      ],
+      "evidence": [
+        "workspace-data.ts: resumes and drafts"
+      ],
+      "copy": {
+        "heading": "My CVs",
+        "body": [
+          "Sample data · 2 CV versions and 1 tailored draft · Backend CV v1 reviewed · Backend CV v2 needs review · System Foundry draft needs review"
+        ],
+        "callsToAction": [
+          {
+            "label": "Upload CV",
+            "target": "#/cv/upload"
+          },
+          {
+            "label": "Review extraction",
+            "target": "#/cv/CV02"
+          },
+          {
+            "label": "Open draft",
+            "target": "#/cv/D01"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/cv. A 12-column title row with Upload CV primary action, then an eight-column document manager list with a four-column selected-document panel. The manager includes an upload drop area that opens the local PDF or DOCX picker, then a table of Name, Updated, Type, Review state, and action. A file picker never claims extraction or upload to a server.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Selecting a document opens its detail in the adjacent panel. Upload validation updates only the form field and preserves entered state.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Selection and validation update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show list and document detail as separate route states. Back returns to the preserved list position.",
+        "medium": "Keep the list full width and open document detail in a sheet.",
+        "expanded": "Use an 8/4 list and detail layout only after a document is selected."
+      }
+    },
+    {
+      "id": "cv-detail-editor",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Review or edit a local CV draft alongside a readable preview.",
+      "userQuestion": "What does this CV version contain, and what needs review?",
+      "stage": "continue",
+      "dependencies": [
+        "cv-manager"
+      ],
+      "evidence": [
+        "workspace-data.ts: Resume.text and reviewState"
+      ],
+      "copy": {
+        "heading": "CV detail",
+        "body": [
+          "Sample data · Backend CV v2 · Needs review · Text is illustrative and does not claim the owner's qualifications"
+        ],
+        "callsToAction": [
+          {
+            "label": "Save changes",
+            "target": "action:save-cv"
+          },
+          {
+            "label": "Mark as reviewed",
+            "target": "action:review-cv"
+          },
+          {
+            "label": "Back to CVs",
+            "target": "#/cv"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/cv/:id. Use an eight-column editable content panel and four-column preview panel. The editor has labelled fields for name, summary, experience, and skills, with visible provenance and review state. The preview is a text layout, not a claim that a PDF export exists. Save is disabled when unchanged.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "press",
+        "behavior": "Save updates the local document state and review action removes the matching task after state changes successfully.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Editor, preview, and status update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Editor and preview become separate views. Preview opens from a visible action and Back restores editor state.",
+        "medium": "Show editor full width and preview in a sheet.",
+        "expanded": "Keep an 8/4 editor and preview arrangement."
+      }
+    },
+    {
+      "id": "jobs-list",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Find a saved job and identify incomplete source information.",
+      "userQuestion": "Which saved jobs need attention or a new application action?",
+      "stage": "act",
+      "dependencies": [
+        "shell"
+      ],
+      "evidence": [
+        "workspace-data.ts: jobs"
+      ],
+      "copy": {
+        "heading": "Jobs",
+        "body": [
+          "Sample data · 12 saved jobs · Northline: description missing · System Foundry · Beacon Data"
+        ],
+        "callsToAction": [
+          {
+            "label": "Add job",
+            "target": "#/jobs/new"
+          },
+          {
+            "label": "Open Northline",
+            "target": "#/jobs/J01"
+          },
+          {
+            "label": "Reset filters",
+            "target": "#/jobs"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/jobs. Title row has Add job primary action. A full-width toolbar includes search, Saved jobs tab, Role, Location, and Type filters. A six-row list shows role, company, source state, and one explicit Open job action. Location and type are empty or unavailable values unless supplied, never fabricated.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Search and filters recompute the result count and retain stable job rows. Add job opens a modal with labelled validation.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Results and modal state update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Use two-line job rows. Search and Filters share a single row, while additional filters open in a sheet.",
+        "medium": "Keep search and two compact filters visible, with remaining filters in a sheet.",
+        "expanded": "Show the full toolbar and six-row list."
+      }
+    },
+    {
+      "id": "job-detail",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Read and complete one job record without losing its linked application context.",
+      "userQuestion": "What is known about this job, and what information is missing?",
+      "stage": "continue",
+      "dependencies": [
+        "jobs-list"
+      ],
+      "evidence": [
+        "workspace-data.ts: Job and Application"
+      ],
+      "copy": {
+        "heading": "Job detail",
+        "body": [
+          "Sample data · Backend Engineer at Northline · Description missing · Application stage: Saved"
+        ],
+        "callsToAction": [
+          {
+            "label": "Save description",
+            "target": "action:save-job-description"
+          },
+          {
+            "label": "Open application",
+            "target": "#/applications/A01"
+          },
+          {
+            "label": "Back to jobs",
+            "target": "#/jobs"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/jobs/:id. Use eight columns for overview and requirements, and four columns for notes and the application trail. A job with missing description shows a required labelled text area. Existing descriptions render as content first and edit only on explicit action.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "press",
+        "behavior": "Saving a description clears the derived task, updates the job, and adds one local activity event.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Content and task state update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Stack overview, requirements, notes, and application trail. Keep Save description visible after the field.",
+        "medium": "Show overview and requirements full width with notes in a sheet.",
+        "expanded": "Use the 8/4 detail layout."
+      }
+    },
+    {
+      "id": "cv-match-analysis",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Explain the available AI match state before any analysis is requested.",
+      "userQuestion": "Can I analyse this CV against this job, and what data would leave this workspace?",
+      "stage": "de_risk",
+      "dependencies": [
+        "job-detail",
+        "cv-detail-editor"
+      ],
+      "evidence": [
+        "README.md",
+        "docs/specs/AI_INTEGRATION.md"
+      ],
+      "copy": {
+        "heading": "CV match analysis",
+        "body": [
+          "Sample data · No analysis available · AI is not configured · No CV or job data has been sent to a provider"
+        ],
+        "callsToAction": [
+          {
+            "label": "Open settings",
+            "target": "#/settings"
+          },
+          {
+            "label": "Back to job",
+            "target": "#/jobs/J02"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/jobs/:id/match. Use a 12-column status panel with source job and CV trail, named provider state, explicit data-sharing notice, and no score, strengths, or gaps until an analysis is actually requested and completed. If a provider is configured later, the primary action reads Analyse match and remains explicit.",
+      "motion": {
+        "purpose": "none",
+        "trigger": "none",
+        "behavior": "This status region is static until an explicitly invoked supported analysis exists.",
+        "durationMs": 0,
+        "easing": "linear",
+        "reducedMotion": "Static."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Use one full-width status panel and retain both source records as links.",
+        "medium": "Keep source details beneath the status row.",
+        "expanded": "Show status and source details in a balanced 8/4 layout."
+      }
+    },
+    {
+      "id": "tailored-cv-workspace",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Review a tailored CV draft against its source without claiming export support.",
+      "userQuestion": "How does this draft relate to its source CV and selected job?",
+      "stage": "continue",
+      "dependencies": [
+        "cv-manager",
+        "job-detail"
+      ],
+      "evidence": [
+        "workspace-data.ts: draft provenance"
+      ],
+      "copy": {
+        "heading": "Tailored CV",
+        "body": [
+          "Sample data · System Foundry draft · Source: Backend CV v1 · Needs review"
+        ],
+        "callsToAction": [
+          {
+            "label": "Review draft",
+            "target": "action:review-draft"
+          },
+          {
+            "label": "Open source CV",
+            "target": "#/cv/CV01"
+          },
+          {
+            "label": "Open job",
+            "target": "#/jobs/J02"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/cv/D01/tailored. Use a six-column source CV panel and six-column tailored-draft panel. Both show visible provenance, review state, and text content. Do not offer PDF or DOCX export until a real export capability is available.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "press",
+        "behavior": "Reviewing the draft updates its state and removes the derived task after the state mutation succeeds.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Status updates immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show source and draft as two route states with a visible switcher.",
+        "medium": "Stack source above draft while keeping provenance at the top of both.",
+        "expanded": "Show side-by-side six-column documents."
+      }
+    },
+    {
+      "id": "applications-tracker",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Work through all applications by stage while retaining stable application identities.",
+      "userQuestion": "Which application should I update next?",
+      "stage": "act",
+      "dependencies": [
+        "shell"
+      ],
+      "evidence": [
+        "workspace-data.ts: applications and stages"
+      ],
+      "copy": {
+        "heading": "Applications",
+        "body": [
+          "Sample data · 12 applications · Saved 3 · Applied 3 · Screening 2 · Interview 2 · Offer 0 · Rejected 1 · Withdrawn 1"
+        ],
+        "callsToAction": [
+          {
+            "label": "Add job",
+            "target": "#/jobs/new"
+          },
+          {
+            "label": "Open application",
+            "target": "#/applications/A01"
+          },
+          {
+            "label": "Change stage",
+            "target": "action:change-stage"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/applications. Show a count, search, stage filter, order control, and a stage board. The board has visible columns for Saved, Applied, Screening, Interview, Offer, Rejected, and Withdrawn. Cards display role, company, linked CV, stage text, and an explicit Open application action. Stage changes use an accessible select or menu, not unsupported drag-only interaction.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Changing stage moves the same application ID between columns, updates pipeline counts and local activity, and preserves keyboard focus.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Columns and counts update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Use a stage filter and two-line application list rather than a horizontal board. One stage is visible at a time.",
+        "medium": "Show a scrollable board with fixed card widths, or a list and stage filter when the board would become unreadable.",
+        "expanded": "Show the full stage board with internal horizontal scrolling only if required."
+      }
+    },
+    {
+      "id": "application-detail",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Update one application and review its history, notes, and local reminders.",
+      "userQuestion": "What is the current state of this application, and what follow-up is recorded?",
+      "stage": "continue",
+      "dependencies": [
+        "applications-tracker"
+      ],
+      "evidence": [
+        "workspace-data.ts: Application, Activity, and Job"
+      ],
+      "copy": {
+        "heading": "Application detail",
+        "body": [
+          "Sample data · Backend Engineer at Northline · CV: Not linked · Stage: Saved · Updated 15 Nov 09:10"
+        ],
+        "callsToAction": [
+          {
+            "label": "Save stage",
+            "target": "action:save-stage"
+          },
+          {
+            "label": "Save note",
+            "target": "action:save-note"
+          },
+          {
+            "label": "Back to applications",
+            "target": "#/applications"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/applications/:id. Use an eight-column overview, timeline, and notes region with a four-column reminder region. Overview, Timeline, Notes, and Reminders are tabs on a ruled tab row. Timeline is built from successful local stage changes and events. Reminders are local manual records only, and the initial sample has none.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Tabs retain selected state. Saving a stage updates the trail, stage count, updated time, and timeline only after success.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Tabs and data update immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show one detail region at a time with a Back action preserving list position. Tabs scroll within their own row.",
+        "medium": "Keep overview full width and open reminders in a sheet.",
+        "expanded": "Use the 8/4 layout, with the reminders region aligned to the detail top."
+      }
+    },
+    {
+      "id": "interview-prep-setup",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Choose a valid interview-stage application and set manual preparation focus.",
+      "userQuestion": "What should I prepare for this interview-stage application?",
+      "stage": "act",
+      "dependencies": [
+        "shell"
+      ],
+      "evidence": [
+        "workspace-data.ts: interview applications and resumes"
+      ],
+      "copy": {
+        "heading": "Interview prep",
+        "body": [
+          "Sample data · 2 interview-stage applications · Platform Engineer at Infrastructure Loop · Backend Engineer at Current Apps"
+        ],
+        "callsToAction": [
+          {
+            "label": "Start practice",
+            "target": "#/interviews/A05/practice"
+          },
+          {
+            "label": "Open application",
+            "target": "#/applications/A05"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/interviews. A four-column application list drives an eight-column setup panel. The setup panel has labelled Job and CV selects plus manual focus-area checkboxes such as Product sense, Execution, and Behavioural. Any focus area not supported by source data remains an optional manual topic, not a claim about the user.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "state_change",
+        "behavior": "Selecting an interview application changes the preparation context and enables Start practice only when a selection is valid.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "Selection state updates immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show the interview list first, then push to the setup panel after a selection.",
+        "medium": "Stack list above setup when either column would fall below 340px.",
+        "expanded": "Use a 4/8 list and setup layout."
+      }
+    },
+    {
+      "id": "interview-practice",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "app-screen"
+      ],
+      "purpose": "Record manual interview preparation without claiming generated questions or AI feedback.",
+      "userQuestion": "What response do I want to practise for this application?",
+      "stage": "continue",
+      "dependencies": [
+        "interview-prep-setup"
+      ],
+      "evidence": [
+        "workspace-data.ts: interviewNote"
+      ],
+      "copy": {
+        "heading": "Interview practice",
+        "body": [
+          "Sample data · Platform Engineer at Infrastructure Loop · Manual preparation notes · AI is not configured"
+        ],
+        "callsToAction": [
+          {
+            "label": "Save practice note",
+            "target": "action:save-interview-note"
+          },
+          {
+            "label": "Back to prep",
+            "target": "#/interviews/A05"
+          },
+          {
+            "label": "Open settings",
+            "target": "#/settings"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/interviews/:id/practice. Use an eight-column manual question and answer area with a four-column guidance area. Questions are editable manual prompts. Guidance is static preparation structure, not claimed AI feedback. Recording and Get feedback actions remain absent until supported capability exists.",
+      "motion": {
+        "purpose": "state_change",
+        "trigger": "press",
+        "behavior": "Saving a practice note changes only the selected application note and shows quiet success feedback after the state update.",
+        "durationMs": 180,
+        "easing": "cubic-bezier(0.2, 0, 0, 1)",
+        "reducedMotion": "The saved state appears immediately."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Show the practice prompt, response area, and save action first. Guidance follows below.",
+        "medium": "Stack guidance below the response area.",
+        "expanded": "Use an 8/4 writing and guidance layout."
+      }
+    },
+    {
+      "id": "settings-view",
+      "layoutFamily": "dashboard",
+      "layoutCases": [
+        "settings-two-column"
+      ],
+      "purpose": "Explain AI connection status and data-sharing limits truthfully.",
+      "userQuestion": "Is an AI provider connected, and is any data leaving this workspace?",
+      "stage": "de_risk",
+      "dependencies": [
+        "shell"
+      ],
+      "evidence": [
+        "README.md",
+        "docs/specs/AI_INTEGRATION.md"
+      ],
+      "copy": {
+        "heading": "Settings",
+        "body": [
+          "Sample data · AI provider: not selected · No data is sent to a provider · Manual tracking remains available"
+        ],
+        "callsToAction": [
+          {
+            "label": "Back to dashboard",
+            "target": "#/dashboard"
+          }
+        ]
+      },
+      "layout": "Dedicated route #/settings. Use a centred two-column settings row with a five-column label and seven-column neutral status panel. The panel contains Provider, Data sharing, and Manual tracking rows. No API-key field, connection test, runner configuration, or Save button appears without implemented backend support.",
+      "motion": {
+        "purpose": "none",
+        "trigger": "none",
+        "behavior": "Static reading state with no entrance or implied connection activity.",
+        "durationMs": 0,
+        "easing": "linear",
+        "reducedMotion": "Static."
+      },
+      "componentNeeds": [],
+      "assetNeeds": [],
+      "transformation": {
+        "compact": "Stack the description above the full-width status panel.",
+        "medium": "Stack the label and panel to avoid narrow columns.",
+        "expanded": "Use the five-column label and seven-column status-panel layout."
+      }
+    }
+  ],
+  "responsive": [
+    "At 1440×900, the dashboard shows its title, count strip, full pipeline, three continuation tasks, five recent applications, interview-preparation header and first row, activity header and first row, and workspace-readiness rows.",
+    "At 390×844, dashboard order is heading, next work, counts, pipeline strip, recent applications, interview preparation, activity, and readiness. The first application row begins before 60% of the viewport.",
+    "At 641px to 1100px, navigation folds into the mobile sheet, panels pair only when each is at least 340px, and list identity fields remain readable.",
+    "Page-level horizontal scrolling is prohibited. Boards, stage strips, and required data tables may scroll internally only.",
+    "Every visible interactive control has a 44px minimum hit area, including compact visual buttons and navigation items.",
+    "Desktop detail panes become a sheet or route replacement on small screens. Back preserves list filters and scroll position.",
+    "Every rendered view has exactly one h1. Detail panel headings use h2 and modal headings follow dialog semantics.",
+    "No supplied-reference-catalog item exists, so no section has a referenceDirectionId."
+  ],
+  "interactions": [
+    "Use one local structured state for jobs, applications, resumes, drafts, events, notes, local reminders, selected records, filters, sorting, and stage selections. Do not claim server persistence, authentication, synchronization, or a connected provider.",
+    "Add job opens a labelled modal. Role, company, and job description are required. URL is optional and must be http or https. Saving atomically creates one job, one Saved application, and one local event. The save control disables while mutating and prevents duplicate submit.",
+    "Upload CV opens the local PDF or DOCX picker. The temporary local limit is 10 MiB. Validate file type, size, and available file signature. New files remain in session memory, show Text not extracted, and are never sent, logged, or stored as parsed content.",
+    "Search is case-insensitive for role and company. Filtering resets pagination or visible row caps. Sorting uses updatedAt with ID as a stable tie-breaker.",
+    "Pipeline and board stages are computed from application records. Selecting a stage filters the related list. Selecting Offer with count 0 renders a true zero count and an empty-state message, not a fake bar.",
+    "A stage change must use an accessible labelled select or menu. It updates the application, timestamp, pipeline, board, task derivation where relevant, and local activity. Re-selecting the current stage creates no event.",
+    "Review extraction and Review draft update reviewState, remove the corresponding derived task, and add an event only after the state changes successfully.",
+    "Document, job, and application rows have neutral hover outlines, semantic selected states, visible focus, and explicit actions. Static text does not receive click affordance.",
+    "Dialogs, drawers, filter sheets, and mobile navigation trap focus, close with Escape, and restore focus to their invoking control.",
+    "Every block supports injected success, loading, empty, zero, and error fixtures. Loading uses flat placeholders without shimmer. Errors are local to the block with Retry and never remove the shell.",
+    "Functional transitions use 180ms cubic-bezier(0.2, 0, 0, 1), are interruptible, and resolve immediately under reduced motion. No page or card entrance animation is used.",
+    "CV match, export, recording, provider configuration, connection testing, and AI feedback remain unavailable status states until their supporting backend and explicit user action exist."
+  ],
+  "acceptanceCriteria": [
+    "Data inventory: Job has id, title, company, description, sourceUrl, and createdAt. Units are jobs. Application has id, jobId, resumeVersionId nullable, status, updatedAt, notes, and interviewNote. Units are applications. Resume and Draft have id, name, reviewState, text, createdAt, optional sourceResumeId, and optional jobId. Activity has id, text, target, and occurredAt. Local reminders have applicationId, text, and optional scheduledAt only after user creation.",
+    "Sample dataset shape: 12 jobs, 12 applications, 2 CV versions, 1 tailored draft, 3 derived tasks, 3 seed events, 0 reminders, and a null AI connection. The snapshot is 15 November 2026, 09:15 Asia/Makassar.",
+    "Sample records: A01/J01 Backend Engineer at Northline is Saved and has no linked CV, updated 15 Nov 2026 09:10. A02/J02 Platform Engineer at System Foundry is Saved and uses CV01. A03/J03 AI Tooling Engineer at Beacon Data is Saved and uses CV02.",
+    "Sample records: A04/J04 Backend Developer at Span Digital, A09/J09 Backend Developer at Axis Digital, and A10/J10 Integration Engineer at Stack Systems are Applied. A07/J07 API Engineer at Compute Tone and A08/J08 Platform Developer at Pattern Works are Screening. A05/J05 Platform Engineer at Infrastructure Loop and A06/J06 Backend Engineer at Current Apps are Interview. A11/J11 Backend Engineer at Coreline is Rejected. A12/J12 Platform Engineer at Process Room is Withdrawn.",
+    "CV01 is Backend CV v1 and reviewed. CV02 is Backend CV v2 and pending review. D01 is System Foundry draft, sourced from CV01, tied to J02, and pending review. J01 has an empty description and the other sample jobs have representative descriptions.",
+    "Assertions: jobs.length equals applications.length equals 12. Saved 3 + Applied 3 + Screening 2 + Interview 2 + Offer 0 + Rejected 1 + Withdrawn 1 equals 12. One application has null CV, ten refer to CV01, one refers to CV02, and every job and CV reference is valid.",
+    "Assertions: the dashboard initial recent rows are A01 through A05 by updatedAt descending. Saved filter returns A01 through A03. Offer filter returns zero. Searching Infrastructure Loop returns A05. Derived outstanding tasks total three.",
+    "Mutation checks: adding one valid job makes 13 jobs, 13 applications, and 4 Saved applications. Moving A01 from Saved to Applied yields Saved 2 and Applied 4 while total remains 12. Reviewing CV02 reduces outstanding tasks from 3 to 2.",
+    "All repeated counts, labels, dates, and application-trail values come from shared selectors, not duplicate text constants. Every view carrying figures shows one quiet Sample data notice.",
+    "Each block retains its header and frame for empty, zero, loading, and error states. Real zero prints as 0. Missing information prints as a muted dash or explicit Not linked. Error copy is local and uses Retry.",
+    "Every control and row has hover, selected, focus-visible, and disabled treatment. Disabled controls remain readable and state why they cannot proceed.",
+    "At 1440×900, 1024px, 768px, and 390×844, there is no page-level horizontal overflow, no overlap, no clipped identity text, and no mobile sidebar taking more than 30% of the viewport.",
+    "At any rendered route there is exactly one h1. Tables use right-aligned tabular figures. Text is at least 11px and readable against its surface. Cards have no resting shadow, no gradient, no glow, no tinted icon boxes, and no decorative imagery.",
+    "All visible controls are keyboard operable. Dialog and sheet Escape behavior, focus return, Back and Forward routes, search, sorting, stage filtering, stage updates, review actions, note saving, form validation, and reduced-motion state changes are testable locally.",
+    "Verify before publishing: sample companies, roles, dates, document names, descriptions, activity messages, and counts live in apps/web/src/lib/workspace-data.ts and must be replaced with real user-owned data before publication. The wireframe remains a concept reference, not evidence of live jobs, interviews, AI configuration, exports, reminders, or provider connectivity."
+  ]
+}
